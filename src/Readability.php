@@ -166,7 +166,8 @@ class Readability
 
             $this->logger->info(sprintf('[Parsing] Article parsed. Amount of words: %s. Current threshold is: %s', $length, $this->configuration->getCharThreshold()));
 
-            if ($result && $length < $this->configuration->getCharThreshold()) {
+            break; // No need for fallbacks based on threshold
+/*            if ($result && $length < $this->configuration->getCharThreshold()) {
                 $this->dom = $this->loadHTML($html);
                 $root = $this->dom->getElementsByTagName('body')->item(0);
 
@@ -205,7 +206,7 @@ class Readability
                 }
             } else {
                 break;
-            }
+            }*/
         }
 
         $result = $this->postProcessContent($result);
