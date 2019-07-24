@@ -64,6 +64,13 @@ class Readability
     protected $direction = null;
 
     /**
+     * Tags of article content.
+     *
+     * @var array
+     */
+    protected $tags = [];
+
+    /**
      * Configuration object.
      *
      * @var Configuration
@@ -659,6 +666,20 @@ class Readability
             // Check to see if this node is a byline, and remove it if it is.
             if ($this->checkByline($node, $matchString)) {
                 $this->logger->debug(sprintf('[Get Nodes] Found byline, removing... Node content was: \'%s\'', substr($node->nodeValue, 0, 128)));
+                $node = NodeUtility::removeAndGetNext($node);
+                continue;
+            }
+
+            // Get article tags
+            if (
+                preg_match(NodeUtility::$regexps['tags'], $matchString) &&
+                !preg_match(NodeUtility::$regexps['okMaybeItsACandidate'], $matchString) &&
+                $node->nodeName !== 'body'
+            ) {
+                $this->logger->debug(sprintf('[Get Nodes] Adding tag to class tags and removing the node. Node content was: \'%s\'', substr($node->nodeValue, 0, 128)));
+
+                $this->addTags($node);
+
                 $node = NodeUtility::removeAndGetNext($node);
                 continue;
             }
@@ -1777,5 +1798,36 @@ class Readability
     public function setDirection($direction)
     {
         $this->direction = $direction;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param array $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * @param DomElement $tagsDomElement
+     */
+    public function addTags($tagsDomElement)
+    {
+        $tags = $this->tags;
+
+        $anchorTags = $tagsDomElement->getElementsByTagName('a');
+        foreach($anchorTags as $tag){
+            $tags[] = trim(strip_tags($tag->nodeValue));
+        }
+
+        $this->tags = array_filter($tags);
     }
 }
