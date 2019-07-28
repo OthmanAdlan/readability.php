@@ -692,7 +692,7 @@ class Readability
                     $node->nodeName !== 'body' &&
                     $node->nodeName !== 'a'
                 ) {
-                    $this->logger->debug(sprintf('[Get Nodes] Removing unlikely candidate. Node content was: \'%s\'', substr($node->nodeValue, 0, 128)));
+                    $this->logger->debug(sprintf('[Get Nodes] Removing unlikely candidate, [%s], Node content was: \'%s\'', $matchString, substr($node->nodeValue, 0, 128)));
                     $node = NodeUtility::removeAndGetNext($node);
                     continue;
                 }
