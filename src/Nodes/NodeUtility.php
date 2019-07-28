@@ -17,7 +17,11 @@ class NodeUtility
      * @var array
      */
     public static $regexps = [
+<<<<<<< HEAD
         'unlikelyCandidates' => '/-ad-|banner|breadcrumbs|combx|comment|community|cover-wrap|disqus|extra|foot|header|legends|menu|related|remark|replies|rss|shoutbox|skyscraper|social|sponsor|supplemental|ad-break|agegate|pagination|pager|popup|yom-remote|-widget|media|caption|instagram|twitter-tweet|ai2html|gdpr|summary|date|lst_modified|article-info/i',
+=======
+        'unlikelyCandidates' => '/-ad-|banner|breadcrumbs|combx|comment|community|cover-wrap|disqus|extra|foot|header|legends|menu|related|remark|replies|rss|shoutbox|skyscraper|social|sponsor|supplemental|ad-break|agegate|pagination|pager|popup|yom-remote|-widget|media|caption|instagram|twitter-tweet|ai2html|gdpr|summary|slider|owl|carousel|relevant|calendar/i',
+>>>>>>> 2e4f5d3a4064d769a8b831dac071099d4d350e1a
         'okMaybeItsACandidate' => '/and|article|body|column|main|shadow/i',
         'extraneous' => '/print|archive|comment|discuss|e[\-]?mail|share|reply|all|login|sign|single|utility/i',
         'byline' => '/byline|author|dateline|writtenby|p-author/i',

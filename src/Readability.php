@@ -655,7 +655,7 @@ class Readability
                 continue;
             }
 
-            $matchString = $node->getAttribute('class') . ' ' . $node->getAttribute('id');
+            $matchString = $node->getAttribute('class') . ' |||||| ' . $node->getAttribute('id');
 
             if (!$node->isProbablyVisible()) {
                 $this->logger->debug(sprintf('[Get Nodes] Removing hidden node... Match string was: \'%s\'', $matchString));
